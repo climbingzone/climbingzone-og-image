@@ -235,6 +235,7 @@ const App = (_: any, state: AppState, setState: SetState) => {
     theme = 'light',
     md = true,
     gradeColor = '#FF0073',
+    pillText = 'PILL',
     title = '**Hello** World',
     subTitle = `I'm a sub title`,
     images = [imageLightOptions[0].value],
@@ -255,6 +256,7 @@ const App = (_: any, state: AppState, setState: SetState) => {
   url.searchParams.append('fontSize', fontSize);
   url.searchParams.append('gradeColor', gradeColor);
   url.searchParams.append('subTitle', encodeURIComponent(subTitle));
+  url.searchParams.append('pillText', encodeURIComponent(pillText));
   for (let image of images) {
     url.searchParams.append('images', image);
   }
@@ -328,6 +330,16 @@ const App = (_: any, state: AppState, setState: SetState) => {
             oninput: (val: string) => {
               console.log('oninput ' + val);
               setLoadingState({ subTitle: val, overrideUrl: url });
+            },
+          }),
+        }),
+        H(Field, {
+          label: 'Pill Text (No MD)',
+          input: H(TextInput, {
+            value: pillText,
+            oninput: (val: string) => {
+              console.log('oninput ' + val);
+              setLoadingState({ pillText: val, overrideUrl: url });
             },
           }),
         }),
