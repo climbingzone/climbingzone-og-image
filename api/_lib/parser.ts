@@ -43,7 +43,7 @@ export function parseRequest(req: IncomingMessage) {
     images: getArray(images),
     widths: getArray(widths),
     heights: getArray(heights),
-    gradeColor: gradeColor || '#FF0073',
+    gradeColor: gradeColor || 'black',
   };
   parsedRequest.images = getDefaultImages(
     parsedRequest.images,
@@ -63,17 +63,14 @@ function getArray(stringOrArray: string[] | string | undefined): string[] {
 }
 
 function getDefaultImages(images: string[], theme: Theme): string[] {
-  const defaultImage =
-    theme === 'light'
-      ? 'https://assets.vercel.com/image/upload/front/assets/design/vercel-triangle-black.svg'
-      : 'https://assets.vercel.com/image/upload/front/assets/design/vercel-triangle-white.svg';
+  const defaultImage = theme === 'light' ? '' : '';
 
   if (!images || !images[0]) {
     return [defaultImage];
   }
   if (
-    !images[0].startsWith('https://assets.vercel.com/') &&
-    !images[0].startsWith('https://assets.zeit.co/')
+    !images[0].startsWith('https://media.climbing.zone/') &&
+    !images[0].startsWith('https://media.preview.climbing.zone/')
   ) {
     images[0] = defaultImage;
   }
