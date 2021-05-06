@@ -1,5 +1,5 @@
 import { IncomingMessage } from 'http';
-import url, { parse } from 'url';
+import { parse } from 'url';
 import { ParsedRequest, Theme } from './types';
 
 export function parseRequest(req: IncomingMessage) {
