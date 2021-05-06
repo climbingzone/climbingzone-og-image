@@ -5,6 +5,7 @@ export interface ParsedRequest {
   fileType: FileType;
   title: string;
   subTitle: string;
+  pillText: string;
   theme: Theme;
   md: boolean;
   fontSize: string;

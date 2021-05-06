@@ -1,13 +1,25 @@
 import { IncomingMessage } from 'http';
-import { parse } from 'url';
+import url, { parse } from 'url';
 import { ParsedRequest, Theme } from './types';
 
 export function parseRequest(req: IncomingMessage) {
   console.log('HTTP ' + req.url);
   const { pathname, query } = parse(req.url || '/', true);
-  const { fontSize, images, widths, heights, theme, md, gradeColor, subTitle } =
-    query || {};
+  const {
+    fontSize,
+    images,
+    widths,
+    heights,
+    theme,
+    md,
+    gradeColor,
+    subTitle,
+    pillText,
+  } = query || {};
 
+  if (Array.isArray(pillText)) {
+    throw new Error('Expected a single pillText');
+  }
   if (Array.isArray(fontSize)) {
     throw new Error('Expected a single fontSize');
   }
@@ -37,6 +49,7 @@ export function parseRequest(req: IncomingMessage) {
     fileType: extension === 'jpeg' ? extension : 'png',
     title: decodeURIComponent(title),
     subTitle: subTitle ? decodeURIComponent(subTitle) : '',
+    pillText: pillText ? decodeURIComponent(pillText) : '',
     theme: theme === 'dark' ? 'dark' : 'light',
     md: md === '1' || md === 'true',
     fontSize: fontSize || '150px',

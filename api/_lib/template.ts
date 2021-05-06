@@ -60,6 +60,8 @@ function getCss(foreground: string, background: string, fontSize: string) {
         margin-right: 50px;
     }
 
+
+
     .container {
         display: flex;
         flex: 1;
@@ -81,10 +83,32 @@ function getCss(foreground: string, background: string, fontSize: string) {
         -webkit-box-orient: vertical;
     }
 
+    .subTitleContainer {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+
     .subTitle {
         margin-top: 50px;
         margin-bottom: 50px;
         -webkit-line-clamp: 1; /* number of lines to show */
+    }
+
+    .pill {
+        font-family: 'Inter', sans-serif;
+        font-size: ${sanitizeHtml(fontSize)};
+        font-style: normal;
+        font-weight: bold;
+        color: white;
+        overflow: hidden;
+        line-height: 1.3;
+        text-overflow: ellipsis;
+        border-radius: 100px;
+        padding-left: 50px;
+        padding-right: 50px;
+        margin-right: 50px;
+        display: inline;
     }
 
     /* MARKDOWN RESET */
@@ -103,9 +127,9 @@ export function getHtml(parsedReq: ParsedRequest) {
     md,
     fontSize,
     gradeColor,
+    pillText,
     images,
   } = parsedReq;
-  console.log('BACKGROUND IMAGE', images[0]);
   const hasBackgroundImage = Boolean(images[0]);
   let background = 'white';
   let foreground = 'black';
@@ -142,9 +166,17 @@ export function getHtml(parsedReq: ParsedRequest) {
               md ? marked(title) : sanitizeHtml(title)
             )}
             </div>
-            <div class="text subTitle">${emojify(
-              md ? marked(subTitle) : sanitizeHtml(subTitle)
-            )}
+            <div class="subTitleContainer">
+                ${
+                  pillText
+                    ? `<div class="pill" style="background-color: ${gradeColor}">${sanitizeHtml(
+                        pillText
+                      )}</div>`
+                    : ''
+                }
+                <div class="text subTitle">
+                    ${emojify(md ? marked(subTitle) : sanitizeHtml(subTitle))}
+                </div>
             </div>
             <div class="logoContainer">
                 <svg class="logo" width="200px" height="200px" viewBox="0 0 72 72" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
