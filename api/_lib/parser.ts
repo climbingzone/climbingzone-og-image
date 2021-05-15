@@ -17,6 +17,8 @@ export function parseRequest(req: IncomingMessage) {
     pillText,
   } = query || {};
 
+  console.log('GRADE', gradeColor);
+
   if (Array.isArray(pillText)) {
     throw new Error('Expected a single pillText');
   }
@@ -56,7 +58,7 @@ export function parseRequest(req: IncomingMessage) {
     images: getArray(images),
     widths: getArray(widths),
     heights: getArray(heights),
-    gradeColor: gradeColor || 'black',
+    gradeColor: gradeColor ? decodeURIComponent(gradeColor) : 'black',
   };
   parsedRequest.images = getDefaultImages(
     parsedRequest.images,
