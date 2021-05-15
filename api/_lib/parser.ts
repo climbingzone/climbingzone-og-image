@@ -52,7 +52,7 @@ export function parseRequest(req: IncomingMessage) {
     pillText: pillText ? decodeURIComponent(pillText) : '',
     theme: theme === 'dark' ? 'dark' : 'light',
     md: md === '1' || md === 'true',
-    fontSize: fontSize || '150px',
+    fontSize: fontSize || '200px',
     images: getArray(images),
     widths: getArray(widths),
     heights: getArray(heights),
